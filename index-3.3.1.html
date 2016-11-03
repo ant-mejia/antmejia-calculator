@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Input Demo</title>
+    <style type="text/css">
+    body {
+        text-align: center;
+        background: #eee;
+        padding: 10%;
+        font-family: sans-serif;
+    }
+    
+    h1 {
+        color: #aaa;
+        font-size: 50px;
+    }
+    
+    div {
+        display: block;
+        text-align: center;
+    }
+    
+    input:focus {
+        outline: none;
+    }
+    
+    .wrapper {
+        display: block;
+    }
+    
+    input[type="button"] {
+        border: 1px solid black;
+        padding: 10px 30px;
+        background: transparent;
+        font-size: 20px;
+        margin: 50px auto;
+        display: inline;
+    }
+    
+    input[type="button"]:hover {
+        background: rgba(0, 0, 0, 0.1);
+    }
+    
+    input[type="text"] {
+        border: none;
+        text-align: center;
+        border-bottom: 1px solid black;
+        background: transparent;
+        font-size: 30px;
+        width: 80px;
+        margin: 0 30px;
+    }
+    
+    #operator,
+    #result {
+        display: inline;
+        font-size: 20px;
+    }
+    
+    #result {
+        font-size: 30px;
+    }
+    </style>
+</head>
+
+<body>
+    <h1>NumberCruncher</h1>
+    <div>
+        <input type="text" name="Value A" id="a">
+        <p id="operator">+</p>
+        <input type="text" name="Value A" id="b">
+        <p id="result"></p>
+        <div class="wrapper">
+            <input type="button" value="Add Numbers" onclick="addTwo()">
+            <input type="button" value="Subtract Numbers" onclick="subTwo()">
+            <input type="button" value="Multiply Numbers" onclick="multiplyTwo()">
+            <input type="button" value="Divide Numbers" onclick="divideTwo()">
+        </div>
+    </div>
+</body>
+<script type="text/javascript">
+var a, b, result;
+
+function setValues() {
+    a = Number(document.getElementById('a').value);
+    b = Number(document.getElementById('b').value);
+}
+
+function displayNumbers(operator, result) {
+    document.getElementById("operator").innerHTML = operator;
+    document.getElementById("result").innerHTML = "= " + result;
+    console.log(result);
+}
+
+function addTwo() {
+    setValues();
+    result = a + b;
+    displayNumbers("+", result);
+}
+
+function subTwo() {
+    setValues();
+    result = a - b;
+    displayNumbers("-", result);
+}
+
+function divideTwo() {
+    setValues();
+    result = a / b;
+    displayNumbers("/", result);
+}
+
+function multiplyTwo() {
+    setValues();
+    result = a * b;
+    displayNumbers("X", result);
+}
+</script>
+
+</html>

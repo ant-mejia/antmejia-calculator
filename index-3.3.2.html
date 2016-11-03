@@ -1,0 +1,264 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <link rel="shortcut icon" type="image/jpg" href="favicon.png">
+    <title>Simpli Calculator</title>
+    <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/5.0.0/normalize.css">
+    <link href="https://fonts.googleapis.com/css?family=Lato:100,300|Raleway:100,200,300,400" rel="stylesheet">
+    <style type="text/css">
+    body {
+        font-family: "Raleway", sans-serif;
+        font-weight: 300;
+        color: #007fff;
+        text-align: center;
+        overflow-x: hidden;
+        height: 100%;
+        width: 100%;
+        background: #fff;
+        background-size: cover;
+        transition: all 0.5s ease-in;
+    }
+    
+    ::selection {
+        background: #444;
+    }
+    
+    h1 {
+        font-family: "Lato", sans-serif;
+        font-weight: 100;
+        font-size: 40px;
+    }
+    
+    .button-wrapper {
+        position: absolute;
+        bottom: 0;
+        width: 100%;
+    }
+    
+    input {
+        position: relative;
+        width: 96w%;
+        margin: -50px 2% 0;
+        padding: auto 100px;
+        border: none;
+        font-size: 8em;
+        font-weight: 300;
+        font-family: "Lato", sans-serif;
+        color: #aaa;
+        overflow: auto;
+        background: transparent;
+    }
+    
+    input:focus,
+    button:focus {
+        outline: none;
+    }
+    
+    table {
+        width: 100%;
+        position: relative;
+        border-collapse: collapse;
+        background: #fff;
+        transition: all 0.3s ease-in;
+    }
+    
+    table td {
+        border: 6px solid #fafafa;
+        border-radius: 10px;
+        font-size: 2rem;
+        vertical-align: middle;
+        padding: 0;
+    }
+    
+    table td:last-child {
+        background: #fafafa;
+    }
+    
+    table td button {
+        width: 75%;
+        padding: 30px;
+        cursor: pointer;
+        background: transparent;
+        border: none;
+        color: #007fff;
+        user-select: none;
+        font-family: "Lato", sans-serif;
+    }
+    
+    #equal {
+        background: #007fff;
+        color: #fff;
+        font-size: 3rem;
+        user-select: none;
+        cursor: pointer;
+    }
+    
+    .toggle-wrapper {
+        top: 10px;
+        right: 10px;
+        position: absolute;
+    }
+    
+    .toggle-wrapper button {
+        background: #007fff;
+        color: #fff;
+        border: none;
+        border-radius: 3px;
+        padding: 10px 15px;
+        -webkit-user-select: none;
+        -moz-user-select: none;
+        -ms-user-select: none;
+        user-select: none;
+    }
+    
+    .toggle-wrapper #toggle1 {
+        display: none;
+        background: rgba(240, 240, 255, 0.3);
+    }
+    </style>
+</head>
+
+<body id="body">
+    <div class="toggle-wrapper">
+        <button id="toggle1" onclick="solidBackground()">Solid</button>
+        <button id="toggle2" onclick="gradientBackground()">Gradient</button>
+    </div>
+    <h1>Simpli Calculator</h1>
+    <div id="calculator">
+        <div class="button-wrapper">
+            <input id="result" type="text" name="">
+            <table id="table">
+                <tr>
+                    <td>
+                        <button onclick="clearLine()" id="AC" value="AC">AC</button>
+                    </td>
+                    <td>
+                        <button onclick="clearEntry()" id="CE" value="CE">CE</button>
+                    </td>
+                    <td>
+                        <button onclick="squareRoot()" id="%" value="%">√</button>
+                    </td>
+                    <td id="a4">
+                        <button onclick="addToInput(this)" id="/" value="/">/</button>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <button onclick="addToInput(this)" id="7" value="7">7</button>
+                    </td>
+                    <td>
+                        <button onclick="addToInput(this)" id="8" value="8">8</button>
+                    </td>
+                    <td>
+                        <button onclick="addToInput(this)" id="9" value="9">9</button>
+                    </td>
+                    <td id="b4">
+                        <button onclick="addToInput(this)" id="*" value="*">*</button>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <button onclick="addToInput(this)" id="4" value="4">4</button>
+                    </td>
+                    <td>
+                        <button onclick="addToInput(this)" id="5" value="5">5</button>
+                    </td>
+                    <td>
+                        <button onclick="addToInput(this)" id="6" value="6">6</button>
+                    </td>
+                    <td id="c4">
+                        <button onclick="addToInput(this)" id="-" value="-">-</button>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <button onclick="addToInput(this)" id="1" value="1">1</button>
+                    </td>
+                    <td>
+                        <button onclick="addToInput(this)" id="2" value="2">2</button>
+                    </td>
+                    <td>
+                        <button onclick="addToInput(this)" id="3" value="3">3</button>
+                    </td>
+                    <td id="d4">
+                        <button onclick="addToInput(this)" id="+" value="+">+</button>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <button onclick="addToInput(this)" id="." value=".">.</button>
+                    </td>
+                    <td>
+                        <button onclick="addToInput(this)" id="0" value="0">0</button>
+                    </td>
+                    <td>
+                        <button onclick="addToInput(this)" id="last" value="">Last</button>
+                    </td>
+                    <td onclick="calcValue()" id="equal">=</td>
+                </tr>
+            </table>
+        </div>
+    </div>
+</body>
+<script type="text/javascript">
+var result = document.getElementById('result'); // Input field
+// Add item to inout value
+function addToInput(arg) {
+    if (result.value == "undefined" || result.value == "NaN") {
+        result.value = "";
+    }
+    result.value += (arg.value);
+}
+
+// Clears the entire line
+function clearLine() {
+    result.value = "";
+}
+
+// Deletes the last character on the calculator
+function clearEntry() {
+    result.value = result.value.substring(0, result.value.length - 1);
+}
+//Set "last" button value
+function setLast(val) {
+    // If the computed result don't return "undefined" or "NaN" (Not a Number), save the result to "last" value
+    if (result.value != "undefined" && result.value != "NaN") {
+        document.getElementById('last').value = val;
+    }
+}
+// Returns square root of value in input
+function squareRoot() {
+    result.value = Math.sqrt(eval(result.value));
+    setLast(result.value);
+}
+//Calculate value
+function calcValue() {
+    var val = eval(result.value);
+    result.value = val;
+    setLast(val);
+}
+// Changes background color and table opacity
+function gradientBackground() {
+    document.getElementById('toggle2').style.display = "none";
+    document.getElementById('toggle1').style.display = "initial";
+    document.getElementById('body').style.cssText = "background: url('IQC1yp.jpg') no-repeat fixed;background-size: cover;color: white;";
+    document.getElementById('table').style.background = "rgba(255, 255, 255, 0.4)";
+    document.getElementById('result').style.color = "white";
+    // Style last column
+    // document.getElementById('a4').style.background = "rgba(250,250,255,0.5)";
+    // document.getElementById('b4').style.background = "rgba(250,250,255,0.5)";
+    // document.getElementById('c4').style.background = "rgba(250,250,255,0.5)";
+    // document.getElementById('d4').style.background = "rgba(250,250,255,0.5)";
+}
+//Changes calculator to original styling
+function solidBackground() {
+    document.getElementById('toggle1').style.display = "none";
+    document.getElementById('toggle2').style.display = "initial";
+    document.getElementById('body').style.cssText = "background: #fff;color: #007fff;";
+    document.getElementById('table').style.background = "white";
+    document.getElementById('result').style.color = "#aaa";
+}
+</script>
+
+</html>
