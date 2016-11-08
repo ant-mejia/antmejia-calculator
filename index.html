@@ -100,12 +100,21 @@
         position: absolute;
     }
     
+    .toggle-wrapper .toggle-circle {
+        min-height: 20px;
+        display: block;
+        width: 20px;
+        background: rgba(255, 255, 255, 1);
+        border-radius: 100%;
+    }
+    
     .toggle-wrapper button {
         background: #007fff;
         color: #fff;
         border: none;
-        border-radius: 3px;
-        padding: 10px 15px;
+        border-radius: 60px;
+        width: 60px;
+        padding: 8px 10px;
         -webkit-user-select: none;
         -moz-user-select: none;
         -ms-user-select: none;
@@ -113,16 +122,21 @@
     }
     
     .toggle-wrapper #toggle1 {
-        display: none;
+        display: initial;
         background: rgba(240, 240, 255, 0.3);
+        /* 0.3 */
+    }
+    
+    #toggle1 .toggle-circle {
+        margin-left: 20px;
     }
     </style>
 </head>
 
 <body id="body">
     <div class="toggle-wrapper">
-        <button id="toggle1" onclick="solidBackground()">Solid</button>
-        <button id="toggle2" onclick="gradientBackground()">Gradient</button>
+        <button id="toggle1" onclick="solidBackground()"><span class="toggle-circle"></span></button>
+        <button id="toggle2" onclick="gradientBackground()"><span class="toggle-circle"></span></button>
     </div>
     <h1>Simpli Calculator</h1>
     <div id="calculator">
@@ -204,11 +218,11 @@
 <script type="text/javascript">
 var result = document.getElementById('result'); // Input field
 // Add item to inout value
-function addToInput(arg) {
+function addToInput(val) {
     if (result.value == "undefined" || result.value == "NaN") {
         result.value = "";
     }
-    result.value += (arg.value);
+    result.value += (val.value);
 }
 
 // Clears the entire line
@@ -220,24 +234,28 @@ function clearLine() {
 function clearEntry() {
     result.value = result.value.substring(0, result.value.length - 1);
 }
+
 //Set "last" button value
 function setLast(val) {
-    // If the computed result don't return "undefined" or "NaN" (Not a Number), save the result to "last" value
+    // If the computed result doesn't return "undefined" or "NaN" (Not a Number), save the result to "last" value
     if (result.value != "undefined" && result.value != "NaN") {
         document.getElementById('last').value = val;
     }
 }
+
 // Returns square root of value in input
 function squareRoot() {
     result.value = Math.sqrt(eval(result.value));
     setLast(result.value);
 }
+
 //Calculate value
 function calcValue() {
     var val = eval(result.value);
     result.value = val;
     setLast(val);
 }
+
 // Changes background color and table opacity
 function gradientBackground() {
     document.getElementById('toggle2').style.display = "none";
@@ -251,6 +269,7 @@ function gradientBackground() {
     // document.getElementById('c4').style.background = "rgba(250,250,255,0.5)";
     // document.getElementById('d4').style.background = "rgba(250,250,255,0.5)";
 }
+
 //Changes calculator to original styling
 function solidBackground() {
     document.getElementById('toggle1').style.display = "none";
